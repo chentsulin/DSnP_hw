@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "p2Table.h"
 
 using namespace std;
 
