@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <string>
 #include "p2Table.h"
 
@@ -7,34 +6,20 @@ using namespace std;
 
 int main()
 {
-  // Table table;
+   Table table;
 
-  string filename;
-  cout << "Please enter the file name: ";
-  cin >> filename;
+   // TODO: read in the csv file
+   string csvFile;
+   cout << "Please enter the file name: ";
+   cin >> csvFile;
+   if (table.read(csvFile))
+      cout << "File \"" << csvFile << "\" was read in successfully." << endl;
+   else exit(-1); // csvFile does not exist.
 
-  ifstream ifs(filename);
-
-  if (!ifs) {
-    cout << "Read file failed" << endl;
-    return 1;
-  }
-
-  while (!ifs.eof()) {
-    string line; 
-    getline(ifs, line);
-    cout << line << endl;
-  }
-
-  ifs.close();
-
-  cout << "File “" << filename << "” was read in successfully." << endl; 
- 
-  while (true) { 
-    string command;
-    getline(cin, command);
-    cout << command;
-  }
-
-  return 0;
+   // TODO: read and execute commands
+   while (true) {
+   	string command;
+    	getline(cin, command);
+   	cout << command;
+   }
 }
