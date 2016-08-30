@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -29,6 +30,8 @@ private:
 };
 
 std::istream& safeGetline(std::istream& is, std::string& t);
+
+vector<string> split(const string &s, char delim);
 
 
 #endif // P2_TABLE_H

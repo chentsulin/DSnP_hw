@@ -18,7 +18,7 @@ Table::read(const string& csvFile)
  	while (!ifs.eof()) {
  		string line;
  		safeGetline(ifs, line);
-		cout << line << endl;
+		split(line, ',');
 	}
 
 	ifs.close();
@@ -58,4 +58,15 @@ istream& safeGetline(istream& is, string& t)
             t += (char)c;
         }
     }
+}
+
+// From http://stackoverflow.com/a/236803/3012290
+vector<string> split(const string &s, char delim) {
+    vector<string> elems;
+    stringstream ss(s);
+    string item;
+    while (getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
 }
