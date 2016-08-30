@@ -21,5 +21,33 @@ int main()
    	string command;
     	getline(cin, command);
    	cout << command;
+   	if (command == "PRINT")
+   	{
+   		table.print();
+   	}
+   	else if (command == "SUM")
+   	{
+   		table.sum();
+   	}
+   	else if (command == "AVE")
+   	{
+   		table.ave();
+   	}
+   	else if (command == "MAX")
+   	{
+   		table.max();
+   	}
+   	else if (command == "MIN")
+   	{
+   		table.min();
+   	}
+   	else if (command == "COUNT")
+   	{
+   		table.count();
+   	}
+   	else if (command == "ADD")
+   	{
+   		table.add("-", "10");
+   	}
    }
 }

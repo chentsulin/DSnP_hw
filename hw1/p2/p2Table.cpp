@@ -18,12 +18,61 @@ Table::read(const string& csvFile)
  	while (!ifs.eof()) {
  		string line;
  		safeGetline(ifs, line);
-		split(line, ',');
+		string2Int(split(line, ','), 0);
 	}
 
 	ifs.close();
 
   	return true; // TODO
+}
+
+
+void
+Table::print()
+{
+	cout << "123" << endl;
+}
+
+int
+Table::sum()
+{
+	return 1;
+}
+
+double
+Table::ave()
+{
+	return 1;
+}
+
+int
+Table::max()
+{
+	return 1;
+}
+
+int
+Table::min()
+{
+	return 1;
+}
+
+int
+Table::count()
+{
+	return 1;
+}
+
+void
+Table::add(string left, string right)
+{
+
+}
+
+void
+Table::exit()
+{
+	std::exit(0);
 }
 
 // From http://stackoverflow.com/a/6089413/3012290
@@ -70,3 +119,14 @@ vector<string> split(const string &s, char delim) {
     }
     return elems;
 }
+
+vector<int> string2Int(const vector<string> strings, char defaultValue) {
+	vector<int> ints;
+	cout << "size: " << strings.size() << endl;
+	for (int i = 0, len = strings.size(); i < len; i++) {
+		cout << strings.at(i) << endl;
+		int num = atoi(strings.at(i).c_str());
+		ints.push_back(num);
+	}
+	return ints;
+};

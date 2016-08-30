@@ -25,13 +25,26 @@ public:
 
    bool read(const string&);
 
+   void print();
+
+   int sum();
+   double ave();
+   int max();
+   int min();
+   int count();
+
+   void add(string left, string right);
+
+   void exit();
+
 private:
    vector<Row>  _rows;
 };
 
-std::istream& safeGetline(std::istream& is, std::string& t);
+istream& safeGetline(istream& is, string& t);
 
 vector<string> split(const string &s, char delim);
 
+vector<int> string2Int(const vector<string> strings, char defaultValue);
 
 #endif // P2_TABLE_H
