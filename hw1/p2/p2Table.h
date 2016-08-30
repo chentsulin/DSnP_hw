@@ -28,4 +28,7 @@ private:
    vector<Row>  _rows;
 };
 
+std::istream& safeGetline(std::istream& is, std::string& t);
+
+
 #endif // P2_TABLE_H
