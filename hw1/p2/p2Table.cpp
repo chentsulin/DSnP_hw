@@ -6,7 +6,25 @@
 
 using namespace std;
 
+
 // Implement member functions of class Row and Table here
+Row::Row(vector<int>& ints) {
+	int length = ints.size();
+	_data = new int[length];
+	for (int i = 0; i < length; i++)
+	{
+		_data[i] = ints.at(i);
+	}
+}
+
+Row::Row(int *ints) {
+	_data = ints;
+}
+
+const int
+Row::operator[] (size_t i) const {
+	return _data[i];
+}
 
 bool
 Table::read(const string& csvFile)
@@ -17,13 +35,32 @@ Table::read(const string& csvFile)
 
  	while (!ifs.eof()) {
  		string line;
+
  		safeGetline(ifs, line);
-		string2Int(split(line, ','), 0);
+ 		cout << line << endl;
+
+ 		vector<string> splitValue = split(line, ',');
+ 	// 	for (decltype(splitValue.size()) i = 0; i < splitValue.size(); ++i)
+	//  {
+  	//   	cout << splitValue[i] << endl;
+	//  }
+		int *ints = new int[splitValue.size()];
+		for (int i = 0, len = splitValue.size(); i < len; i++) {
+			cout << splitValue.at(i) << endl;
+			int num = atoi(splitValue.at(i).c_str());
+			ints[i] = num;
+		}
+		// for (decltype(ints.size()) i = 0; i < ints.size(); ++i)
+		// {
+  //   		cout << ints[i] << endl;
+		// }
+		Row row(ints);
+		_rows.push_back(row);
 	}
 
 	ifs.close();
 
-  	return true; // TODO
+  	return true;
 }
 
 
@@ -120,13 +157,13 @@ vector<string> split(const string &s, char delim) {
     return elems;
 }
 
-vector<int> string2Int(const vector<string> strings, char defaultValue) {
-	vector<int> ints;
-	cout << "size: " << strings.size() << endl;
-	for (int i = 0, len = strings.size(); i < len; i++) {
-		cout << strings.at(i) << endl;
-		int num = atoi(strings.at(i).c_str());
-		ints.push_back(num);
-	}
-	return ints;
+void stringToInt(const vector<string> &strings) {
+	// cout << "size: " << strings.size() << endl;
+	// int *ints = new int[1];
+	// for (int i = 0, len = strings.size(); i < len; i++) {
+	// 	cout << strings.at(i) << endl;
+	// 	int num = atoi(strings.at(i).c_str());
+	// 	ints[i] = num;
+	// }
+	// return ints;
 };

@@ -10,41 +10,44 @@ using namespace std;
 class Row
 {
 public:
-   const int operator[] (size_t i) const { } // TODO
-   int& operator[] (size_t i) { } // TODO
+	Row(vector<int>& ints);
+	Row(int *ints);
+
+	const int operator[] (size_t i) const;
+	int& operator[] (size_t i);
 
 private:
-   int  *_data;
+	int *_data;
 };
 
 class Table
 {
 public:
-   const Row& operator[] (size_t i) const;
-   Row& operator[] (size_t i);
+	const Row& operator[] (size_t i) const;
+	Row& operator[] (size_t i);
 
-   bool read(const string&);
+	bool read(const string&);
 
-   void print();
+	void print();
 
-   int sum();
-   double ave();
-   int max();
-   int min();
-   int count();
+	int sum();
+	double ave();
+	int max();
+	int min();
+	int count();
 
-   void add(string left, string right);
+	void add(string left, string right);
 
-   void exit();
+	void exit();
 
 private:
-   vector<Row>  _rows;
+	vector<Row> _rows;
 };
 
 istream& safeGetline(istream& is, string& t);
 
 vector<string> split(const string &s, char delim);
 
-vector<int> string2Int(const vector<string> strings, char defaultValue);
+void stringToInt(const vector<string> strings);
 
 #endif // P2_TABLE_H
