@@ -11,13 +11,16 @@ class Row
 {
 public:
 	Row(vector<int>& ints);
-	Row(int *ints);
+	Row(int *data, int length);
 
 	const int operator[] (size_t i) const;
 	int& operator[] (size_t i);
 
+	int size();
+
 private:
 	int *_data;
+	int _length;
 };
 
 class Table
@@ -47,7 +50,5 @@ private:
 istream& safeGetline(istream& is, string& t);
 
 vector<string> split(const string &s, char delim);
-
-void stringToInt(const vector<string> strings);
 
 #endif // P2_TABLE_H

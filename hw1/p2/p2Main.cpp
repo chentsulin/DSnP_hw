@@ -16,14 +16,17 @@ int main()
       cout << "File \"" << csvFile << "\" was read in successfully." << endl;
    else exit(-1); // csvFile does not exist.
 
-   // TODO: read and execute commands
    while (true) {
    	string command;
     	getline(cin, command);
-   	cout << command;
+
    	if (command == "PRINT")
    	{
    		table.print();
+   	}
+   	else if (command == "EXIT")
+   	{
+   		exit(0);
    	}
    	else if (command == "SUM")
    	{
@@ -49,5 +52,6 @@ int main()
    	{
    		table.add("-", "10");
    	}
+   	cout << "Please enter your command (PRINT, SUM, AVE, MAX, MIN, COUNT, ADD, EXIT)" << endl;
    }
 }

@@ -1,13 +1,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 #include "p2Table.h"
 
 
 using namespace std;
 
 
-// Implement member functions of class Row and Table here
+/*********
+ *
+ * Row
+ *
+ *********/
+
+/* Constructor */
+
 Row::Row(vector<int>& ints) {
 	int length = ints.size();
 	_data = new int[length];
@@ -15,16 +23,38 @@ Row::Row(vector<int>& ints) {
 	{
 		_data[i] = ints.at(i);
 	}
+	_length = length;
 }
 
-Row::Row(int *ints) {
-	_data = ints;
+Row::Row(int *data, int length) {
+	_data = data;
+	_length= length;
 }
+
+/* Operator Overloading */
 
 const int
 Row::operator[] (size_t i) const {
 	return _data[i];
 }
+
+int& Row::operator[] (size_t i) {
+	return _data[i];
+}
+
+/* Instance Method */
+
+int Row::size() {
+	return _length;
+}
+
+/*********
+ *
+ * Table
+ *
+ *********/
+
+/* Class Method */
 
 bool
 Table::read(const string& csvFile)
@@ -37,24 +67,19 @@ Table::read(const string& csvFile)
  		string line;
 
  		safeGetline(ifs, line);
- 		cout << line << endl;
+ 		if (line.empty()) continue;
 
  		vector<string> splitValue = split(line, ',');
- 	// 	for (decltype(splitValue.size()) i = 0; i < splitValue.size(); ++i)
-	//  {
-  	//   	cout << splitValue[i] << endl;
-	//  }
-		int *ints = new int[splitValue.size()];
-		for (int i = 0, len = splitValue.size(); i < len; i++) {
+
+ 		int length = splitValue.size();
+		int *ints = new int[length];
+		for (int i = 0, len = length; i < len; i++) {
 			cout << splitValue.at(i) << endl;
 			int num = atoi(splitValue.at(i).c_str());
 			ints[i] = num;
 		}
-		// for (decltype(ints.size()) i = 0; i < ints.size(); ++i)
-		// {
-  //   		cout << ints[i] << endl;
-		// }
-		Row row(ints);
+
+		Row row(ints, length);
 		_rows.push_back(row);
 	}
 
@@ -63,11 +88,36 @@ Table::read(const string& csvFile)
   	return true;
 }
 
+/* Operator Overloading */
+
+const Row&
+Table::operator[] (size_t i) const {
+	return _rows[i];
+}
+
+Row& Table::operator[] (size_t i) {
+	return _rows[i];
+}
+
 
 void
 Table::print()
 {
-	cout << "123" << endl;
+	for (int i = 0, len = _rows.size(); i < len; i++) {
+		Row row = _rows[i];
+		for (int j = 0; j < row.size(); j++)
+		{
+			if (row[j] == -100)
+			{
+				cout << setw(4) << right << "";
+			}
+			else
+			{
+				cout << setw(4) << right << row[j];
+			}
+		}
+		cout << endl;
+	}
 }
 
 int
@@ -148,22 +198,38 @@ istream& safeGetline(istream& is, string& t)
 
 // From http://stackoverflow.com/a/236803/3012290
 vector<string> split(const string &s, char delim) {
-    vector<string> elems;
-    stringstream ss(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        elems.push_back(item);
+	vector<string> words;
+    int i = 0;
+    char ch = s[i];
+    string word;
+    while (ch) {
+    	if (isspace(ch)) {
+    		if (!word.empty())
+			{
+				words.push_back(word);
+				word = "";
+			}
+    	}
+    	else if (ch == delim)
+    	{
+    		if (word.empty())
+			{
+				word = "-100";
+			}
+			words.push_back(word);
+			word = "";
+    	}
+    	else
+    	{
+    		word += ch;
+    	}
+    	i++;
+    	ch = s[i];
     }
-    return elems;
+    if (word.empty())
+	{
+		word = "-100";
+	}
+	words.push_back(word);
+	return words;
 }
-
-void stringToInt(const vector<string> &strings) {
-	// cout << "size: " << strings.size() << endl;
-	// int *ints = new int[1];
-	// for (int i = 0, len = strings.size(); i < len; i++) {
-	// 	cout << strings.at(i) << endl;
-	// 	int num = atoi(strings.at(i).c_str());
-	// 	ints[i] = num;
-	// }
-	// return ints;
-};
