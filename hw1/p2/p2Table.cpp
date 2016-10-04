@@ -16,16 +16,6 @@ using namespace std;
 
 /* Constructor */
 
-Row::Row(vector<int>& ints) {
-	int length = ints.size();
-	_data = new int[length];
-	for (int i = 0; i < length; i++)
-	{
-		_data[i] = ints.at(i);
-	}
-	_length = length;
-}
-
 Row::Row(int *data, int length) {
 	_data = data;
 	_length= length;
@@ -123,52 +113,87 @@ Table::print()
 int
 Table::sum(int index)
 {
-	return 1;
+	int acc = 0;
+	for (int i = 0, len = _rows.size(); i < len; i++) {
+		Row row = _rows[i];
+		if (row[index] != -100) acc += row[index];
+	}
+	return acc;
 }
 
 double
 Table::ave(int index)
 {
-	return 1;
+	int size = _rows.size();
+	return (double) sum(index) / size;
 }
 
 int
 Table::max(int index)
 {
-	return 1;
+	int maxValue = -100;
+	for (int i = 0, len = _rows.size(); i < len; i++) {
+		Row row = _rows[i];
+		if (row[index] != -100 && row[index] > maxValue) {
+			maxValue = row[index];
+		}
+	}
+	return maxValue;
 }
 
 int
 Table::min(int index)
 {
-	return 1;
+	int minValue = 101;
+	for (int i = 0, len = _rows.size(); i < len; i++) {
+		Row row = _rows[i];
+		if (row[index] != -100 && row[index] < minValue) {
+			minValue = row[index];
+		}
+	}
+	return minValue;
 }
 
 int
 Table::count(int index)
 {
-	return 1;
+	vector<int> ints;
+
+	for (int i = 0, len = _rows.size(); i < len; i++) {
+		Row row = _rows[i];
+		if (row[index] != -100) {
+			bool same = false;
+			for (int j = 0; j < ints.size(); j++)
+			{
+				if (ints.at(j) == row[index])
+				{
+					same = true;
+				}
+			}
+			if (!same) {
+				ints.push_back(row[index]);
+			}
+		}
+	}
+	return ints.size();
 }
 
 void
-Table::add(string left, string right) // FIXME: argv..
+Table::add(vector<string> &args)
 {
-	int length = 2;
+	int length = args.size();
 	int *ints = new int[length];
 
-
-	ints[0] = (left == "-") ? -100 : atoi(left.c_str());
-	ints[1] = (right == "-") ? -100 : atoi(right.c_str());
+	for (int i = 0; i < length; i++)
+	{
+		ints[i] = args.at(i) == "-" ?
+			-100 : atoi(args.at(i).c_str());
+	}
 
 	Row row(ints, length);
 	_rows.push_back(row);
 }
 
-void
-Table::exit()
-{
-	std::exit(0);
-}
 
 // From http://stackoverflow.com/a/6089413/3012290
 istream& safeGetline(istream& is, string& t)

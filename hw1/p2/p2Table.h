@@ -10,7 +10,6 @@ using namespace std;
 class Row
 {
 public:
-	Row(vector<int>& ints);
 	Row(int *data, int length);
 
 	const int operator[] (size_t i) const;
@@ -39,9 +38,7 @@ public:
 	int min(int index);
 	int count(int index);
 
-	void add(string left, string right);
-
-	void exit();
+	void add(vector<string> &args);
 
 private:
 	vector<Row> _rows;

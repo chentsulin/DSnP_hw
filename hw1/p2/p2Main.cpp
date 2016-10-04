@@ -18,15 +18,13 @@ int main()
       cout << "File \"" << csvFile << "\" was read in successfully." << endl;
    else exit(-1); // csvFile does not exist.
 
-   cout << "Please enter your command (PRINT, SUM, AVE, MAX, MIN, COUNT, ADD, EXIT)" << endl;
+   cin.ignore(INT_MAX, '\n');
 
    while (true) {
+   	cout << "Please enter your command (PRINT, SUM, AVE, MAX, MIN, COUNT, ADD, EXIT)" << endl;
+
    	string command;
     	getline(cin, command);
-
-    	if (command.empty()) continue;
-
-    	cout << "Please enter your command (PRINT, SUM, AVE, MAX, MIN, COUNT, ADD, EXIT)" << endl;
 
     	vector<string> args = parseCommand(command);
     	string arg1 = args.at(0);
@@ -44,7 +42,7 @@ int main()
    	else if (arg1 == "AVE")
    	{
    		string columnIndex = args.at(1);
-   		int result = table.ave(atoi(columnIndex.c_str())); //
+   		double result = table.ave(atoi(columnIndex.c_str())); //
    		cout << "The average of data in column #" << columnIndex << " is " << result << "." << endl;
    	}
    	else if (arg1 == "MAX")
@@ -67,7 +65,8 @@ int main()
    	}
    	else if (arg1 == "ADD")
    	{
-   		table.add(args.at(1), args.at(2));
+   		args.erase(args.begin());
+   		table.add(args);
    	}
    	else if (arg1 == "EXIT")
    	{
