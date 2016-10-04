@@ -121,39 +121,47 @@ Table::print()
 }
 
 int
-Table::sum()
+Table::sum(int index)
 {
 	return 1;
 }
 
 double
-Table::ave()
+Table::ave(int index)
 {
 	return 1;
 }
 
 int
-Table::max()
+Table::max(int index)
 {
 	return 1;
 }
 
 int
-Table::min()
+Table::min(int index)
 {
 	return 1;
 }
 
 int
-Table::count()
+Table::count(int index)
 {
 	return 1;
 }
 
 void
-Table::add(string left, string right)
+Table::add(string left, string right) // FIXME: argv..
 {
+	int length = 2;
+	int *ints = new int[length];
 
+
+	ints[0] = (left == "-") ? -100 : atoi(left.c_str());
+	ints[1] = (right == "-") ? -100 : atoi(right.c_str());
+
+	Row row(ints, length);
+	_rows.push_back(row);
 }
 
 void
@@ -196,7 +204,7 @@ istream& safeGetline(istream& is, string& t)
     }
 }
 
-// From http://stackoverflow.com/a/236803/3012290
+// From http://stackoverflow.com/a/2025273/3012290
 vector<string> split(const string &s, char delim) {
 	vector<string> words;
     int i = 0;

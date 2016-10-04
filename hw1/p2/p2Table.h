@@ -33,11 +33,11 @@ public:
 
 	void print();
 
-	int sum();
-	double ave();
-	int max();
-	int min();
-	int count();
+	int sum(int index);
+	double ave(int index);
+	int max(int index);
+	int min(int index);
+	int count(int index);
 
 	void add(string left, string right);
 
