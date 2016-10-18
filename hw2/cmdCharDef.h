@@ -66,7 +66,7 @@ enum ParseChar
    // -- The following simple/combo keys are platform-dependent
    //    You should test to check the returned codes of these key presses
    // -- Use "testAsc.cpp" to test
-   // 
+   //
    // [FLAG bit for combo keys]
    // -- Added to the returned ParseChar of combo keys
    // -- i.e. The returned ParseChar will be "ComboKeyEnum + FLAG bit"
@@ -75,17 +75,17 @@ enum ParseChar
    //
    // [Intermediate keys for combo keys]
    // -- Intermediate keys are the common parts of combo keys
-   // 
-   BACK_SPACE_KEY   = 127,
-   
+   //
+   BACK_SPACE_KEY   = 127, // TODO
+
    //
    // -- Arrow keys: 27 -> 91 -> {UP=65, DOWN=66, RIGHT=67, LEFT=68}
    ARROW_KEY_FLAG   = 1 << 8,
    ARROW_KEY_INT    = 91,
-   ARROW_UP_KEY     = 65 + ARROW_KEY_FLAG,
-   ARROW_DOWN_KEY   = 66 + ARROW_KEY_FLAG,
-   ARROW_RIGHT_KEY  = 67 + ARROW_KEY_FLAG,
-   ARROW_LEFT_KEY   = 68 + ARROW_KEY_FLAG,
+   ARROW_UP_KEY     = 61, // = 65 + ARROW_KEY_FLAG,
+   ARROW_DOWN_KEY   = 93, // ] 66 + ARROW_KEY_FLAG,
+   ARROW_RIGHT_KEY  = 92, // \ 67 + ARROW_KEY_FLAG,
+   ARROW_LEFT_KEY   = 91, // [ 68 + ARROW_KEY_FLAG,
    ARROW_KEY_BEGIN  = ARROW_UP_KEY,
    ARROW_KEY_END    = ARROW_LEFT_KEY,
 
@@ -95,12 +95,12 @@ enum ParseChar
    //
    MOD_KEY_FLAG     = 1 << 9,
    MOD_KEY_INT      = 91,
-   HOME_KEY         = 49 + MOD_KEY_FLAG,
-   INSERT_KEY       = 50 + MOD_KEY_FLAG,
-   DELETE_KEY       = 51 + MOD_KEY_FLAG,
-   END_KEY          = 52 + MOD_KEY_FLAG,
-   PG_UP_KEY        = 53 + MOD_KEY_FLAG,
-   PG_DOWN_KEY      = 54 + MOD_KEY_FLAG,
+   HOME_KEY         = 6, // Ctrl+F 49 + MOD_KEY_FLAG,
+   INSERT_KEY       = 7, // Ctrl+G 50 + MOD_KEY_FLAG,
+   DELETE_KEY       = 8, // Ctrl+H 51 + MOD_KEY_FLAG,
+   END_KEY          = 11, // Ctrl+K 52 + MOD_KEY_FLAG,
+   PG_UP_KEY        = 12, // Ctrl+L 53 + MOD_KEY_FLAG,
+   PG_DOWN_KEY      = 13, // Ctrl+M 54 + MOD_KEY_FLAG,
    MOD_KEY_BEGIN    = HOME_KEY,
    MOD_KEY_END      = PG_DOWN_KEY,
    MOD_KEY_DUMMY    = 126,
@@ -138,7 +138,7 @@ enum ParseChar
    // -- The following simple/combo keys are platform-dependent
    //    You should test to check the returned codes of these key presses
    // -- Use "testAsc.cpp" to test
-   // 
+   //
    // [FLAG bit for combo keys]
    // -- Added to the returned ParseChar of combo keys
    // -- i.e. The returned ParseChar will be "ComboKeyEnum + FLAG bit"
@@ -147,9 +147,9 @@ enum ParseChar
    //
    // [Intermediate keys for combo keys]
    // -- Intermediate keys are the common parts of combo keys
-   // 
+   //
    BACK_SPACE_KEY   = TA_BACK_SPACE_KEY,
-   
+
    //
    // -- Arrow keys: 27 -> 91 -> {UP=65, DOWN=66, RIGHT=67, LEFT=68}
    ARROW_KEY_FLAG   = TA_ARROW_KEY_FLAG,
